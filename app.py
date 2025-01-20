@@ -4,15 +4,15 @@ import re
 
 # Function to extract recommendations from Markdown content
 def extract_recommendations(md_content):
-    pattern = r"\d+\.\s+(.*)"
+    pattern = r"\|.*?\|\s*(\d+)\s*\|\s*(C-LD)\s*\|\s*(.*?)\s*\|"
     matches = re.findall(pattern, md_content)
 
     recommendations = []
-    for match in matches:
+    for cor, loe, recommendation in matches:
         recommendations.append({
-            "recommendation_content": match.strip(),
-            "recommendation_class": "",
-            "rating": ""
+            "recommendation_content": recommendation.strip(),
+            "recommendation_class": cor.strip(),
+            "rating": loe.strip()
         })
     
     return recommendations
