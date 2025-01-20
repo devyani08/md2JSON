@@ -4,8 +4,8 @@ import re
 
 # Function to extract recommendations from Markdown content
 def extract_recommendations(md_content):
-    # Adjust the regex to match rows in the Markdown table format
-    pattern = r"\|\s*(\d+)\s*\|\s*(C-LD)\s*\|\s*(.*?)\s*\|"
+    # Updated regex to match COR and LOE values more flexibly
+    pattern = r"\|\s*([\d\w]+)\s*\|\s*([\w-]+)\s*\|\s*(.*?)\s*\|"
     matches = re.findall(pattern, md_content)
 
     recommendations = []
