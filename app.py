@@ -11,8 +11,8 @@ def extract_recommendations(md_content):
     for match in matches:
         recommendations.append({
             "recommendation_content": match.strip(),
-            "recommendation_class": "1",
-            "rating": "C-LD"
+            "recommendation_class": "",
+            "rating": ""
         })
     
     return recommendations
