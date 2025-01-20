@@ -4,7 +4,8 @@ import re
 
 # Function to extract recommendations from Markdown content
 def extract_recommendations(md_content):
-    pattern = r"\|.*?\|\s*(\d+)\s*\|\s*(C-LD)\s*\|\s*(.*?)\s*\|"
+    # Adjust the regex to match rows in the Markdown table format
+    pattern = r"\|\s*(\d+)\s*\|\s*(C-LD)\s*\|\s*(.*?)\s*\|"
     matches = re.findall(pattern, md_content)
 
     recommendations = []
@@ -50,18 +51,21 @@ if uploaded_file is not None:
     # Extract recommendations from the Markdown content
     recommendations = extract_recommendations(md_content)
     
-    # Generate JSON chunks
-    json_chunks = generate_json_chunks(recommendations)
-    
-    # Display the JSON chunks
-    st.write("Generated JSON:")
-    st.json(json_chunks)
-    
-    # Option to download JSON file
-    json_output = json.dumps(json_chunks, indent=2)
-    st.download_button(
-        label="Download JSON",
-        data=json_output,
-        file_name="output.json",
-        mime="application/json"
-    )
+    if recommendations:
+        # Generate JSON chunks
+        json_chunks = generate_json_chunks(recommendations)
+        
+        # Display the JSON chunks
+        st.write("Generated JSON:")
+        st.json(json_chunks)
+        
+        # Option to download JSON file
+        json_output = json.dumps(json_chunks, indent=2)
+        st.download_button(
+            label="Download JSON",
+            data=json_output,
+            file_name="output.json",
+            mime="application/json"
+        )
+    else:
+        st.warning("No recommendations found in the uploaded file. Please check the file format.")
