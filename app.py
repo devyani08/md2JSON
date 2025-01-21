@@ -8,18 +8,18 @@ def extract_recommendations(md_content):
     pattern = r"\|\s*([\d\w]+)\s*\|\s*([\w-]+)\s*\|\s*(.*?)\s*\|"
     matches = re.findall(pattern, md_content)
 
-    recommendations = []
+    recommendationss = []
     for cor, loe, recommendations in matches:
-        recommendations.append({
-            "recommendation_content": recommendations.strip(),
+        recommendationss.append({
+            "recommendation_content": recommendationss.strip(),
             "recommendation_class": cor.strip(),
             "rating": loe.strip()
         })
     
-    return recommendations
+    return recommendationss
 
 # Function to generate JSON chunks
-def generate_json_chunks(recommendations):
+def generate_json_chunks(recommendationss):
     base_json = {
         "title": "Distal Radius Fracture Rehabilitation",
         "subCategory": [],
@@ -32,7 +32,7 @@ def generate_json_chunks(recommendations):
     }
     
     json_chunks = []
-    for rec in recommendations:
+    for rec in recommendationss:
         chunk = base_json.copy()
         chunk.update(rec)
         json_chunks.append(chunk)
@@ -49,11 +49,11 @@ if uploaded_file is not None:
     md_content = uploaded_file.read().decode("utf-8")
     
     # Extract recommendations from the Markdown content
-    recommendations = extract_recommendations(md_content)
+    recommendationss = extract_recommendations(md_content)
     
-    if recommendations:
+    if recommendationss:
         # Generate JSON chunks
-        json_chunks = generate_json_chunks(recommendations)
+        json_chunks = generate_json_chunks(recommendationss)
         
         # Display the JSON chunks
         st.write("Generated JSON:")
