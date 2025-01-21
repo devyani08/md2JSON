@@ -9,9 +9,9 @@ def extract_recommendations(md_content):
     matches = re.findall(pattern, md_content)
 
     recommendations = []
-    for cor, loe, recommendation in matches:
+    for cor, loe, recommendations in matches:
         recommendations.append({
-            "recommendation_content": recommendation.strip(),
+            "recommendation_content": recommendations.strip(),
             "recommendation_class": cor.strip(),
             "rating": loe.strip()
         })
